@@ -1,31 +1,20 @@
-import re
-
-# Calculadora de lineas de comando
-def evaluar_expresion(expr):
-    try:
-        if not re.match(r'^[\d\s\+\-\*/\(\)\.]+$', expr):
-            return "Error: Expresión invalida"
-
-        resultado = eval(expr)
-        return resultado
-    except ZeroDivisionError:
-        return "Error: Division por cero"
-    except Exception:
-        return "Error al evaluar la expresion"
-
 def main():
     print("Calculadora de linea de comandos")
-    print("Escribe una expresión matematica (ejemplo: 3 * (4 - 1))")
+    print("Escribe una expresion matematica (ej: 3 * (4 - 1))")
     print("Escribe 'salir' para terminar.\n")
 
     while True:
-        expr = input(">> ")
-        if expr.lower() == "salir":
-            print("Chao")
+        entrada = input("-> ")
+
+        if entrada.lower() == 'salir':
+            print("Saliendo de la calculadora.")
             break
 
-        resultado = evaluar_expresion(expr)
-        print("Respuesta:", resultado)
+        try:
+            resultado = eval(entrada)
+            print("Resultado:", resultado)
+        except Exception as e:
+            print("Error en la expresion:", e)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
