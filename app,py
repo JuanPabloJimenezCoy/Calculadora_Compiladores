@@ -1,20 +1,33 @@
+import argparse
+
 def main():
-    print("Calculadora de linea de comandos")
-    print("Escribe una expresion matematica (ej: 3 * (4 - 1))")
-    print("Escribe 'salir' para terminar.\n")
+    parser = argparse.ArgumentParser(description="Calculadora de línea de comandos")
+    parser.add_argument('expresion', nargs='?', help="Expresión matemática a evaluar")
+    args = parser.parse_args()
 
-    while True:
-        entrada = input("-> ")
-
-        if entrada.lower() == 'salir':
-            print("Saliendo de la calculadora.")
-            break
-
+    if args.expresion:
         try:
-            resultado = eval(entrada)
+            resultado = eval(args.expresion)
             print("Resultado:", resultado)
         except Exception as e:
-            print("Error en la expresion:", e)
+            print("Error en la expresión:", e)
+    else:
+        print("Calculadora de línea de comandos")
+        print("Escribe una expresión matemática (ej: 3 * (4 - 1))")
+        print("Escribe 'salir' para terminar.\n")
+
+        while True:
+            entrada = input("-> ")
+
+            if entrada.lower() == 'salir':
+                print("Saliendo de la calculadora.")
+                break
+
+            try:
+                resultado = eval(entrada)
+                print("Resultado:", resultado)
+            except Exception as e:
+                print("Error en la expresión:", e)
 
 if __name__ == '__main__':
     main()
